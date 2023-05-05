@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question.8</title>
+  </head>
+  <body>
+    <h3>Thank You</h3>
+    <script>
+      function checkBrackets(code) {
+        const stack = [];
+        const brackets = {
+          "(": ")",
+          "[": "]",
+          "{": "}",
+        };
+        for (let i = 0; i < code.length; i++) {
+          const char = code.charAt(i);
+          if (brackets.hasOwnProperty(char)) {
+            stack.push(char);
+          } else if (Object.values(brackets).includes(char)) {
+            if (stack.length === 0) {
+              return false; // unmatched closing bracket
+            }
+            const lastOpenBracket = stack.pop();
+            if (brackets[lastOpenBracket] !== char) {
+              return false; // mismatched closing bracket
+            }
+          }
+        }
+        return stack.length === 0; // all brackets should be closed
+      }
+      const code = prompt("Enter a code snippet:");
+      const isBracketsClosed = checkBrackets(code);
+      if (isBracketsClosed) {
+        alert("All brackets are closed.");
+      } else {
+        alert("Some brackets are not closed.");
+      }
+    </script>
+  </body>
+</html>
